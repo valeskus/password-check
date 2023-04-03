@@ -1,14 +1,21 @@
 import React, { useCallback, useState } from 'react';
+import './PasswordCheck.style.css'
+import { ColorSection } from '../ColorSection/ColorSection';
 import { PasswordInput } from '../PasswordInput';
 
 export function PasswordCheck(props) {
     const [value, setValue] = useState('');
+    const [easyColor, setEasyColor] = useState(false);
+    // const [mediumColor, setMediumColor] = useState('');
+    // const [strongColor, setStrongColor] = useState('');
 
-    const handleClick = useCallback(() => {
-        // props.onSearch(searchValue);
+const letters =/[a-zA-Z]+/;
+const numbers = /[0-9]+/;
+const symbols = /[$-/:-?{-~!"^_`[\]]+/;
+const lettersAndNumbers = (v)=>{return letters.test(v)&& numbers.test(v)}
+const lettersAndSymbols = (v)=>{return letters.test(v) && symbols.test(v)}
+const numbersAndSymbols = (v)=>{return numbers.test(v) && symbols.test(v)}
 
-        // eslint-disable-next-line
-    }, [props.onSearch, value]);
 
     const handleChange = useCallback(
         (nextValue) => {
@@ -17,8 +24,30 @@ export function PasswordCheck(props) {
             }
 
             setValue(nextValue);
+            changeIndicator(nextValue)
         }, // eslint-disable-next-line
-        [props.onSearch]
+        []
+    );
+
+    const changeIndicator = useCallback(
+        (nextValue) => {
+            if (letters.test(nextValue)&& numbers.test(nextValue) && symbols.test(nextValue)) {
+                console.log('all')
+
+            } else if (lettersAndNumbers(nextValue) || lettersAndSymbols(nextValue) || numbersAndSymbols(nextValue)) {
+                console.log(1)
+            }
+           
+            else if(letters.test(nextValue) || numbers.test(nextValue) || symbols.test(nextValue)) {
+                console.log('letters')
+                setEasyColor(true)
+            }
+          
+
+
+
+        }, // eslint-disable-next-line
+        []
     );
 
     return (
@@ -31,8 +60,9 @@ export function PasswordCheck(props) {
                     type='text'
                 />
             </div>
-
-
+            <ColorSection color={`${easyColor ? "redColor" : ""}`} />
+            <ColorSection  />
+            <ColorSection/>
         </div>
     );
 }

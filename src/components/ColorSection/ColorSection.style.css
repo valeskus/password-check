@@ -1,0 +1,10 @@
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: grey;
+    margin-bottom: 5px;
+}
+
+.redColor{
+    background-color: red;
+}
