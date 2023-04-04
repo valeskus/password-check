@@ -5,9 +5,9 @@ import { PasswordInput } from '../PasswordInput';
 
 export function PasswordCheck(props) {
     const [value, setValue] = useState('');
-    const [easyColor, setEasyColor] = useState();
-    const [mediumColor, setMediumColor] = useState();
-    const [strongColor, setStrongColor] = useState();
+    const [easyColor, setEasyColor] = useState('');
+    const [mediumColor, setMediumColor] = useState('');
+    const [strongColor, setStrongColor] = useState('');
 
     const letters = /[a-zA-Z]+/;
     const numbers = /[0-9]+/;
@@ -54,18 +54,19 @@ export function PasswordCheck(props) {
     );
 
     return (
-        <div className='searchBar-container'>
-            <div className='searchInput-container'>
-                <PasswordInput
-                    onChange={handleChange}
-                    value={value}
-                    id='password'
-                    type='text'
-                />
+        <div className='passwordCheck-container'>
+            <PasswordInput
+                onChange={handleChange}
+                value={value}
+                id='password'
+                type='text'
+            />
+            <div className='indicator-container'>
+                <ColorSection color={`${easyColor && easyColor}`} />
+                <ColorSection color={`${mediumColor && mediumColor}`} />
+                <ColorSection color={`${strongColor && strongColor}`} />
             </div>
-            <ColorSection color={`${easyColor && easyColor }`} />
-            <ColorSection color={`${mediumColor && mediumColor }`} />
-            <ColorSection color={`${strongColor && strongColor}`} />
+
         </div>
     );
 }

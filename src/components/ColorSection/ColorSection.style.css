@@ -1,17 +1,18 @@
 .indicator {
-    width: 10px;
+    width: 50px;
     height: 10px;
-    background-color: grey;
-    margin-bottom: 5px;
+    background-color: #808080;
+    border-radius: 5px;
+    margin: 10px;
 }
 
 .redColor{
-    background-color: red;
+    background-color: #ff0000;
 }
 .yellowColor{
-    background-color: yellow;
+    background-color:#ffdf00;;
 }
 
 .greenColor{
-    background-color: green;
+    background-color:#0dce0d;
 }

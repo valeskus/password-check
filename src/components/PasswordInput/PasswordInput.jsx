@@ -1,16 +1,15 @@
 import React from 'react';
+import './PasswordInput.style.css'
 
 export function PasswordInput(props) {
     return (
         <form >
-            <label>
-                Password:
+            <label className='inputLable'>
+                Password
                 <input onChange={(e) => {
                     props.onChange(e.target.value);
                 }}
                     value={props.value}
-                    type={props.type}
-                    id={props.id}
                     className='input'
                     placeholder={'Enter your password'} />
             </label>
