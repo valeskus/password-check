@@ -5,16 +5,16 @@ import { PasswordInput } from '../PasswordInput';
 
 export function PasswordCheck(props) {
     const [value, setValue] = useState('');
-    const [easyColor, setEasyColor] = useState(false);
-    // const [mediumColor, setMediumColor] = useState('');
-    // const [strongColor, setStrongColor] = useState('');
+    const [easyColor, setEasyColor] = useState();
+    const [mediumColor, setMediumColor] = useState();
+    const [strongColor, setStrongColor] = useState();
 
-const letters =/[a-zA-Z]+/;
-const numbers = /[0-9]+/;
-const symbols = /[$-/:-?{-~!"^_`[\]]+/;
-const lettersAndNumbers = (v)=>{return letters.test(v)&& numbers.test(v)}
-const lettersAndSymbols = (v)=>{return letters.test(v) && symbols.test(v)}
-const numbersAndSymbols = (v)=>{return numbers.test(v) && symbols.test(v)}
+    const letters = /[a-zA-Z]+/;
+    const numbers = /[0-9]+/;
+    const symbols = /[$-/:-?{-~!"^_`[\]]+/;
+    const lettersAndNumbers = (v) => { return letters.test(v) && numbers.test(v) }
+    const lettersAndSymbols = (v) => { return letters.test(v) && symbols.test(v) }
+    const numbersAndSymbols = (v) => { return numbers.test(v) && symbols.test(v) }
 
 
     const handleChange = useCallback(
@@ -31,20 +31,23 @@ const numbersAndSymbols = (v)=>{return numbers.test(v) && symbols.test(v)}
 
     const changeIndicator = useCallback(
         (nextValue) => {
-            if (letters.test(nextValue)&& numbers.test(nextValue) && symbols.test(nextValue)) {
-                console.log('all')
+            if (letters.test(nextValue) && numbers.test(nextValue) && symbols.test(nextValue)) {
+                setEasyColor('greenColor')
+                setMediumColor('greenColor')
+                return setStrongColor('greenColor')
 
             } else if (lettersAndNumbers(nextValue) || lettersAndSymbols(nextValue) || numbersAndSymbols(nextValue)) {
-                console.log(1)
+                setStrongColor()
+                setEasyColor('yellowColor')
+                return setMediumColor('yellowColor')
+            } else if (letters.test(nextValue) || numbers.test(nextValue) || symbols.test(nextValue)) {
+                setMediumColor()
+                setStrongColor()
+                return setEasyColor('redColor')
             }
-           
-            else if(letters.test(nextValue) || numbers.test(nextValue) || symbols.test(nextValue)) {
-                console.log('letters')
-                setEasyColor(true)
-            }
-          
-
-
+            setEasyColor()
+            setMediumColor()
+            setStrongColor()
 
         }, // eslint-disable-next-line
         []
@@ -60,9 +63,9 @@ const numbersAndSymbols = (v)=>{return numbers.test(v) && symbols.test(v)}
                     type='text'
                 />
             </div>
-            <ColorSection color={`${easyColor ? "redColor" : ""}`} />
-            <ColorSection  />
-            <ColorSection/>
+            <ColorSection color={`${easyColor && easyColor }`} />
+            <ColorSection color={`${mediumColor && mediumColor }`} />
+            <ColorSection color={`${strongColor && strongColor}`} />
         </div>
     );
 }
