@@ -58,8 +58,6 @@ export function PasswordCheck(props) {
             <PasswordInput
                 onChange={handleChange}
                 value={value}
-                id='password'
-                type='text'
             />
             <div className='indicator-container'>
                 <ColorSection color={`${easyColor && easyColor}`} />
